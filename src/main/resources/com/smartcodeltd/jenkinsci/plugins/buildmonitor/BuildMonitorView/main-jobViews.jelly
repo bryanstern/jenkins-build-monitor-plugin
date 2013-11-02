@@ -27,6 +27,11 @@
             <div data-ng-show="!!job.estimatedDuration" class="build-time">
                 <span class="elapsed" data-ng-show="job.progress > 0">{{job.lastBuildDuration}}</span>
                 <span class="estimated">{{job.estimatedDuration}}</span>
+                
+            </div>
+
+            <div data-ng-show="!!job.startedTimeAgo" class="build-date">
+                <span class="start">{{job.startedTimeAgo}}</span>
             </div>
         </div>
     </li>

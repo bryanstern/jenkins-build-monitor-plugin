@@ -4,6 +4,7 @@ import hudson.model.*;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 import java.util.*;
+import java.text.SimpleDateFormat;
 
 import static hudson.model.Result.SUCCESS;
 
@@ -70,6 +71,19 @@ public class JobView {
     @JsonProperty
     public String estimatedDuration() {
         return formatted(lastBuild().estimatedDuration());
+    }
+
+    @JsonProperty
+    public String startedTimeAgo() {
+        Run lastRun = null;
+        lastRun = job.getLastCompletedBuild();
+
+        if(lastRun != null) {
+            SimpleDateFormat format = new SimpleDateFormat("EEE, MMM d @ h:mm a");
+            return format.format(lastRun.getTime());
+        } else {
+            return "";
+        }
     }
 
     private String formatted(Duration duration) {
